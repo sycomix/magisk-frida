@@ -95,7 +95,7 @@ def package_module(project_tag: str):
     with zipfile.ZipFile(module_zip, "w", compression=zipfile.ZIP_DEFLATED) as zf:
         for root, _, files in os.walk(PATH_BUILD_TMP):
             for file_name in files:
-                if file_name == "placeholder" or file_name == ".gitkeep":
+                if file_name in ["placeholder", ".gitkeep"]:
                     continue
                 zf.write(Path(root).joinpath(file_name),
                          arcname=Path(root).relative_to(PATH_BUILD_TMP).joinpath(file_name))

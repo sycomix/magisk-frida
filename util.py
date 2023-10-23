@@ -12,9 +12,7 @@ def strip_revision(tag) -> str:
 def get_last_github_tag(project_name) -> str:
     releases_url = f"https://api.github.com/repos/{project_name}/releases/latest"
     releases = requests.get(releases_url).json()
-    # TODO: don't assume order
-    last_release = releases["tag_name"]
-    return last_release
+    return releases["tag_name"]
 
 
 # gets last tag of frida
@@ -49,8 +47,7 @@ def sort_tags(tags: [str]) -> [str]:
 # gets last tag from filter
 def get_last_tag(filter_args: [str]) -> str:
     tags = exec_git_command(["tag", "-l"] + filter_args).splitlines()
-    last_tag = "" if len(tags) < 1 else sort_tags(tags)[-1]
-    return last_tag
+    return "" if len(tags) < 1 else sort_tags(tags)[-1]
 
 
 # gets commit message
